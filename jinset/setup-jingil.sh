@@ -6,10 +6,10 @@ setupf (){
     read -p "pls enter the site's rss , for example nullex.ir/feed/ (with last slash/) :  " rssa
     read -p "pls enter the site's name , for example 'nullex' :  " sname
     mkdir "`echo $HOME`"/jingil/"$sname"
-    cp ./conf.txt "`echo $HOME`"/jingil/"$sname"/conf.txt
+    cp conf.txt "`echo $HOME`"/jingil/"$sname"/conf.txt
     echo "$rssa" > "`echo $HOME`"/jingil/"$sname"/conf.txt
-    cp ./jingil.sh "`echo $HOME`"/jingil/"$sname"/jingil.sh
-    cp ./last_date.txt "`echo $HOME`"/jingil/"$sname"/last_date.txt
+    cp jingil.sh "`echo $HOME`"/jingil/"$sname"/jingil.sh
+    cp last_date.txt "`echo $HOME`"/jingil/"$sname"/last_date.txt
     read -p "Do you want to adds another site ? (y/n)" answer
     if [ "$answer" != "y" ];then
       echo "goodbye :) !"
@@ -35,17 +35,17 @@ deletef (){
   done
 }
 fset (){
-  echo "*/10 * * * * $USER "`echo $HOME`"/jingil/bjingil.sh" > ./jincron
-  mkdir "`echo $HOME`"/jingil
-  cp ./bjingil.sh "`echo $HOME`"/jingil/
-  cp ./jingil.png "`echo $HOME`"/jingil/
-  sudo -s cp ./jincron /etc/cron.d/
+  echo "*/10 * * * * $USER `echo $HOME`/jingil/bjingil.sh" > ./jincron
+  mkdir `echo $HOME`/jingil
+  cp bjingil.sh `echo $HOME`/jingil/
+  cp jingil.png `echo $HOME`/jingil/
+  sudo -s cp jincron /etc/cron.d/
 }
-counter=(`cat setup-counter.txt`)
+counter=`cat setup-counter.txt`
 if [ "$counter" != "1" ];then
   fset
   setupf
-  echo "1" > ./setup-counter.txt
+  echo "1" > setup-counter.txt
 elif [ "$counter" == "1" ];then
   while true;do
     echo -e "\e[92mDo you want to add another site , \e[93mdelete a site , \e[91mstart setup from first again or \\e[91mremove jingil ? (\e[92madd/\e[93mdelete/\e[91msetup/\e[91muninstall) :  "
@@ -60,11 +60,11 @@ elif [ "$counter" == "1" ];then
         break ;;
       "uninstall")
         rm -R "`echo $HOME`"/jingil
-        echo 0 > ./setup-counter.txt
+        echo 0 > setup-counter.txt
         echo -e "\e[91mjingil uninstalled :( !"
         break ;;
       "setup")
-        rm -R "`echo $HOME`"/jingil
+        rm -R `echo $HOME`/jingil
         setupf
         break ;;
       *)
